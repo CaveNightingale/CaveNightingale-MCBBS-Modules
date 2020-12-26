@@ -4,6 +4,8 @@ name = 防止刷屏
 description = 折叠超长帖子
 author = 洞穴夜莺
 icon = https://i.loli.net/2020/12/26/9DxFIzTnC2R3htQ.png
+update = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/NoEee.js
+version = 1.0
 */
 // 出于防止base64刷屏的考虑，图标放在图床，加载不出来不是我的问题
 
@@ -46,7 +48,7 @@ if(postList) {
 				a.innerHTML = "↓帖子被折叠↓";
 				a.style = "color: gray;"
 				let ac = document.createElement("div");
-				ac.style = "font-size:0.8em; text-align: center;";
+				ac.style = "font-size:0.8em; text-align: center; background-color: #e3c99e;";
 				ac.appendChild(a);
 				document.getElementById("comment_" + parse[1]).after(ac);
 			}
