@@ -4,7 +4,7 @@ name = 主题操作记录
 description = 给每个主题显示操作记录
 author = 洞穴夜莺
 icon = https://www.mcbbs.net/template/mcbbs/image/collapsed_no.gif
-update = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/OperactionLog.js
+update = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/OperationLog.js
 version = 1.0
 */
 let postList = document.getElementById("postlist");
