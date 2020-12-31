@@ -1,0 +1,41 @@
+
+{
+	"cavenightingale.mcbbs.modules.bettercodeblock": {
+	  "id": "cavenightingale.mcbbs.modules.bettercodeblock",
+	  "name": "更好的代码框",
+	  "description": "代码高亮",
+	  "author": "洞穴夜莺",
+	  "gid": "CaveNightingale:CaveNightingale-MCBBS-Modules:BetterCodeBlock:master",
+	  "version": "0.1"
+	},
+	"cavenightingale.mcbbs.modules.noeee": {
+	  "id": "cavenightingale.mcbbs.modules.noeee",
+	  "name": "防止刷屏",
+	  "description": "折叠超长帖子",
+	  "author": "洞穴夜莺",
+	  "icon": "https://i.loli.net/2020/12/26/9DxFIzTnC2R3htQ.png",
+	  "updateURL": "CaveNightingale:CaveNightingale-MCBBS-Modules:NoEee:master",
+	  "gid": "CaveNightingale:CaveNightingale-MCBBS-Modules:NoEee:master",
+	  "version": "1.1"
+	},
+	"cavenightingale.mcbbs.modules.operationlog": {
+	  "id": "cavenightingale.mcbbs.modules.operationlog",
+	  "name": "主题操作记录",
+	  "description": "给每个主题显示操作记录",
+	  "author": "洞穴夜莺",
+	  "icon": "https://www.mcbbs.net/template/mcbbs/image/collapsed_no.gif",
+	  "updateURL": "https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/OperationLog.js",
+	  "gid": "CaveNightingale:CaveNightingale-MCBBS-Modules:OperationLog:master",
+	  "version": "1.1"
+	},
+	"cavenightingale.mcbbs.modules.quickat": {
+	  "id": "cavenightingale.mcbbs.modules.quickat",
+	  "name": "快速@",
+	  "description": "一键@人，带改名跟踪",
+	  "author": "洞穴夜莺",
+	  "icon": "https://i.loli.net/2020/12/26/3zDMp1uxX9ZLsqN.png",
+	  "updateURL": "https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/QuickAt.js",
+	  "gid": "CaveNightingale:CaveNightingale-MCBBS-Modules:QuickAt:master",
+	  "version": "1.1"
+	}
+  }

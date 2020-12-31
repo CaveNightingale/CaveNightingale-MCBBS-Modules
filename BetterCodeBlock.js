@@ -3,7 +3,7 @@ id = cavenightingale.mcbbs.modules.bettercodeblock
 name = 更好的代码框
 description = 代码高亮
 author = 洞穴夜莺
-version = 1.0
+version = 0.1
 */
 function resourceUrl(name) {
 	return 'https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/' + name;
@@ -115,7 +115,10 @@ for(let block of list){
 		}
 	}
 }
-document.head.innerHTML += '<link href="'+ resourceUrl('lib/prism.css') +'" rel="stylesheet" />';
+let link = document.createElement("link");
+link.href = resourceUrl("lib/prism.css");
+link.rel = "stylesheet";
+document.head.appendChild(link);
 let prism = document.createElement("script");
 prism.src = resourceUrl('lib/prism.js');
 document.body.appendChild(prism);

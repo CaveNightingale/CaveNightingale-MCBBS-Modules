@@ -4,8 +4,8 @@ name = 主题操作记录
 description = 给每个主题显示操作记录
 author = 洞穴夜莺
 icon = https://www.mcbbs.net/template/mcbbs/image/collapsed_no.gif
-update = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/OperationLog.js
-version = 1.0
+updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/OperationLog.js
+version = 1.1
 */
 let postList = document.getElementById("postlist");
 let threadHrefReg = /thread-([0-9]+)-[0-9]+-[0-9]+.html/;
@@ -17,10 +17,11 @@ if(postList) {
 			if(thread) {
 				let author = document.getElementById("favatar" + parse[1]);
 				if(author.lastElementChild.tagName === "UL"){
-					author.lastElementChild.innerHTML +=
-`<li class="view_operation_log">
-<a href="forum.php?mod=misc&action=viewthreadmod&tid=${thread[1]}"
-title="主题操作记录" class="xi2" onclick="showWindow('viewthreadmod', this.href)">主题操作记录</a></li>`;
+					let li = document.createElement("li");
+					li.className = "view_operation_log";
+					li.innerHTML = `<a href="forum.php?mod=misc&action=viewthreadmod&tid=${thread[1]}"
+title="主题操作记录" class="xi2" onclick="showWindow('viewthreadmod', this.href)">主题操作记录</a>`;
+					author.lastElementChild.appendChild(li);
 				}
 			}
 		}

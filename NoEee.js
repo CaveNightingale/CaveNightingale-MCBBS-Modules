@@ -4,8 +4,8 @@ name = 防止刷屏
 description = 折叠超长帖子
 author = 洞穴夜莺
 icon = https://i.loli.net/2020/12/26/9DxFIzTnC2R3htQ.png
-update = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/NoEee.js
-version = 1.0
+updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/NoEee.js
+version = 1.1
 */
 // 出于防止base64刷屏的考虑，图标放在图床，加载不出来不是我的问题
 
@@ -28,11 +28,14 @@ if(postList) {
 			if(content && content.offsetHeight > maxHeight) {
 				div.style.maxHeight = "80px";
 				div.style.overflow = "hidden";
-				var authi = document.getElementById("authorposton" + parse[1]).parentElement;
+				let authi = document.getElementById("authorposton" + parse[1]).parentElement;
 				let btn = document.createElement("a");
 				btn.href = "javascript:void(0)";
 				btn.innerHTML = "显示/折叠帖子";
-				authi.innerHTML += '<span class="pipe">|</span>';
+				let pipe = document.createElement("span");
+				pipe.className = "pipe";
+				pipe.innerHTML = "|";
+				authi.appendChild(pipe);
 				authi.appendChild(btn);
 				let a = document.createElement("a");
 				a.href = "javascript:void(0)";

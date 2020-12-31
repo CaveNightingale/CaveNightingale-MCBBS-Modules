@@ -4,8 +4,8 @@ name = 快速@
 description = 一键@人，带改名跟踪
 author = 洞穴夜莺
 icon = https://i.loli.net/2020/12/26/3zDMp1uxX9ZLsqN.png
-update = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/QuickAt.js
-version = 1.0
+updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/QuickAt.js
+version = 1.1
 */
 // 改名的刷新时间间隔：一天八次
 const INTERVAL = 1000 * 60 * 60 * 3;
