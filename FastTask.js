@@ -5,7 +5,7 @@ description = 领取任务/获取奖励而不必频繁地跳转
 author = 洞穴夜莺
 icon = https://www.mcbbs.net/static/image/task/task.gif
 updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/FastTask.js
-version = 1.1
+version = 1.1.1
 */
 if(typeof $ === 'undefined')// common.js未加载
 	return;
@@ -37,13 +37,33 @@ function getMessageAt(url, callback) {
 			if(!msg || !msg.firstElementChild)
 				callback(null, "nomessageindoc");
 			else
-				callback(removeScript(msg.firstElementChild).innerText);
+				callback(removeScript(msg.firstElementChild).textContent, null);
 		} else {
 			callback(null, res);
 		}
 	});
 }
 
+function processAllTask(tasks, index, success, callback) {
+	while(index < tasks.length && !tasks[index].isConnected)
+		index++;
+	if(index === tasks.length)
+		callback(success);
+	else
+		getMessageAt(tasks[index].href, (msg, err) => {
+			msg = msg.trim();
+			if(err) {
+				console.error("领取任务失败" + err);
+			} else if(msg === "任务申请成功" || msg === "恭喜您，任务已成功完成，您将收到奖励通知，请注意查收") {
+				tasks[index].remove();
+				success++;
+			}
+			processAllTask(tasks, index + 1, success, callback);
+		});
+}
+
+
+let all = [];
 for(let a of document.getElementsByTagName("a")) {
 	if(taskUrlRegex.test(a.href)) {
 		a.onclick = function(ev) {
@@ -60,5 +80,33 @@ for(let a of document.getElementsByTagName("a")) {
 				}
 			});
 		}
+		all.push(a);
+	}
+}
+
+if(location.pathname === "/home.php" && /item=(new|doing)/.test(location.search) && !/do=view/.test(location.search)) {
+	let divs = $C("ptm", document, "div");
+	if(divs[0] && divs[0].firstElementChild instanceof HTMLTableElement && divs[0].parentElement.className === "bm bw0"){
+		let bar = document.createElement("div");
+		divs[0].firstElementChild.before(bar);
+		bar.style.textAlign = "right";
+		let a = document.createElement("a");
+		bar.appendChild(a);
+		a.href = "javascript:;";
+		a.innerHTML = "领取全部";
+		a.onclick = () => {
+			let onclick = a.onclick
+			a.onclick = null;
+			let doing = /item=doing/.test(location.search);
+			a.innerHTML = doing ? "正在尝试获取全部奖励..." : "正在尝试领取全部任务...";
+			processAllTask(all, 0, 0, success => {
+				a.onclick = onclick;
+				a.innerHTML = "领取全部";
+				if(success)
+					showMessageToUser("成功领取了" + success + (doing ? "个奖励" : "个任务"));
+				else
+					showError("无法领取任何" + (doing ? "奖励" : "任务"));
+			});
+		};
 	}
 }
