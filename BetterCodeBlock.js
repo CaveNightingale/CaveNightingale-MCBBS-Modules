@@ -3,8 +3,10 @@ id = cavenightingale.mcbbs.modules.bettercodeblock
 name = 更好的代码框
 description = 代码高亮
 author = 洞穴夜莺
-version = 0.1
+version = 0.3a
 */
+if(typeof $ === 'undefined')// common.js未加载
+	return;
 function resourceUrl(name) {
 	return 'https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/' + name;
 }
@@ -15,7 +17,11 @@ const fileNameRegex = {
 	java: /\.java$/,
 	javascript: /\.js$/,
 	yaml: /\.yml$/,
-	json: /\.json$/
+	json: /\.json$/,
+	css: /\.css$/,
+	d: /\.d$/,
+	bash: /\.sh$/,
+	batch: /\.bat$/
 };
 
 function guessLangFromFileName(line) {
@@ -49,12 +55,16 @@ function isBBCode(code) {
 }
 
 function guessLangFromContent(code) {
-	if(/(typedef|struct|union)/m.test(code)) {
+	if(/@echo off|java\.exe -jar/mi.test(code)){
+		return 'batch';
+	} if(/(typedef|struct|union)/m.test(code)) {
 		// C语言和C++区别难度较大，但是这些关键字只有C语言有，C++不支持的
 		if(/(_Bool|_Noreturn|_Complex|_Imaginary|_Generic|_Thread|_Atomic|_Static_assert)/m.test(code))
 			return 'c';
 		// 剩下无法判断的干脆当C++处理
 		return 'cpp';
+	} else if(/document\.getElementById/.test(code)) {
+		return 'javascript';
 	} else if(/import[ ]+(java|net\.minecraft|org\.bukkit|com\.mojang)(\.([0-9]|[a-z]|[A-Z]))*/m.test(code)) {
 		return 'java';
 	} else if(isJSON(code)) {
@@ -80,38 +90,38 @@ function createLineNo(line) {
 	return div;
 }
 
-let collection = document.getElementsByClassName("blockcode");
-let list = [];
-for(let x of collection) {// 这个HTMLCollection是动态的，操作过程中会导致内容变化，所以要先拷贝
-	list.push(x);
-}
-for(let block of list){
-	let index = block.parentElement.childNodes;
-	for(let i = 0; i < index.length; i++) {
-		if(index[i] === block) {
-			index = i;
-			break;
-		}
+function transformDom() {
+	let collection = $C("blockcode");
+	let list = [];
+	for(let x of collection) {// 这个HTMLCollection是动态的，操作过程中会导致内容变化，所以要先拷贝
+		list.push(x);
 	}
-	let fileNameGuess = index >= 1 ? guessLangFromFileName(block.parentElement.childNodes[index - 1].textContent) : undefined;
-	if(index >= 2 && block.parentElement.childNodes[index - 1] instanceof HTMLBRElement)
-		fileNameGuess = guessLangFromFileName(block.parentElement.childNodes[index - 2]);
-	for(let ele of block.firstChild.children) {
-		if(ele.tagName == "OL") {
-			let ccode = ele.innerText.replace(/\n\n/g, "\n");
-			block.firstChild.style.display = "none";// 一会复制代码还要用
-			let copy = block.lastChild;
-			copy.remove();// 挪个位置
-			block.appendChild(createLineNo(ccode.split("\n").length));
-			let pre = document.createElement("pre");
-			block.appendChild(pre);
-			let code = document.createElement("code");
-			pre.appendChild(code);
-			block.appendChild(copy);
-			copy.className = "cavenightingale_copy_code";
-			code.className = "language-" + (fileNameGuess || guessLangFromContent(ccode));
-			code.innerText = ccode;
-			block.className = "cavenightingale_blockcode";
+	for(let block of list){
+		let index = block.parentElement.childNodes;
+		for(let i = 0; i < index.length; i++) {
+			if(index[i] === block) {
+				index = i;
+				break;
+			}
+		}
+		let fileNameGuess = index >= 1 ? guessLangFromFileName(block.parentElement.childNodes[index - 1].textContent) : undefined;
+		if(index >= 2 && block.parentElement.childNodes[index - 1] instanceof HTMLBRElement)
+			fileNameGuess = guessLangFromFileName(block.parentElement.childNodes[index - 2]);
+		for(let ele of block.firstChild.children) {
+			if(ele.tagName == "OL") {
+				let ccode = ele.innerText.replace(/\n\n/g, "\n").trim();
+				block.firstChild.style.display = "none";// 一会复制代码还要用
+				let copy = block.lastChild;
+				block.appendChild(createLineNo(ccode.split("\n").length));
+				let pre = document.createElement("pre");
+				block.appendChild(pre);
+				let code = document.createElement("code");
+				pre.appendChild(code);
+				copy.className = "cavenightingale_copy_code";
+				code.className = "language-" + (fileNameGuess || guessLangFromContent(ccode));
+				code.innerText = ccode;
+				block.className = "cavenightingale_blockcode";
+			}
 		}
 	}
 }
@@ -141,3 +151,14 @@ style.innerHTML = `.cavenightingale_copy_code {
 	position: relative;
 }`;// 修改过的Zapic的css
 document.body.appendChild(style);
+
+transformDom();
+let postlist = $("postlist");
+if(postlist)
+	new MutationObserver((list, observer) => {
+		observer.disconnect();
+		transformDom();
+		if(typeof Prism != "undefined")
+			Prism.highlightAllUnder(postlist);
+		observer.observe(postlist, {childList: true, subtree: true});
+	}).observe(postlist, {childList: true, subtree: true});

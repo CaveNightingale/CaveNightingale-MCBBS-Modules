@@ -7,15 +7,17 @@ icon = https://www.mcbbs.net/template/mcbbs/image/collapsed_no.gif
 updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/OperationLog.js
 version = 1.1
 */
-let postList = document.getElementById("postlist");
+if(typeof $ === 'undefined')// common.js未加载
+	return;
+let postList = $("postlist");
 let threadHrefReg = /thread-([0-9]+)-[0-9]+-[0-9]+.html/;
 if(postList) {
 	for(let post of postList.children) {
 		let parse = /post_([0-9]*)/.exec(post.id);
 		if(parse instanceof Array && parse.length >= 2) {
-			let thread = threadHrefReg.exec(document.getElementById("postnum" + parse[1]).href);
+			let thread = threadHrefReg.exec($("postnum" + parse[1]).href);
 			if(thread) {
-				let author = document.getElementById("favatar" + parse[1]);
+				let author = $("favatar" + parse[1]);
 				if(author.lastElementChild.tagName === "UL"){
 					let li = document.createElement("li");
 					li.className = "view_operation_log";

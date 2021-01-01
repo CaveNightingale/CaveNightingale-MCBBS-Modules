@@ -9,6 +9,8 @@ version = 1.1
 */
 // 出于防止base64刷屏的考虑，图标放在图床，加载不出来不是我的问题
 
+if(typeof $ === 'undefined')// common.js未加载
+	return;
 MCBBS.createConfig("maxHeight", "帖子最大高度", "text", "超过此高度的帖子将被折叠（单位：像素）");
 let maxHeight = parseInt(MCBBS.getConfigVal("maxHeight", 1000));
 if(!(maxHeight >= 0)) {//这里不可以用<代替，因为maxHeight可能不是一个数
@@ -16,19 +18,19 @@ if(!(maxHeight >= 0)) {//这里不可以用<代替，因为maxHeight可能不是
 }
 MCBBS.createConfig("foldThread", "折叠主楼", "checkbox", "是否折叠主楼");
 let foldThread = MCBBS.getConfigVal("foldThread", false);
-let postList = document.getElementById("postlist");
+let postList = $("postlist");
 let threadHrefReg = /thread-[0-9]+-[0-9]+-[0-9]+.html/;
 if(postList) {
 	for(let post of postList.children) {
 		let parse = /post_([0-9]*)/.exec(post.id);
 		if(parse instanceof Array && parse.length >= 2 && 
-				((!threadHrefReg.test(document.getElementById("postnum" + parse[1]).href)) || foldThread)) {
-			let content = document.getElementById("postmessage_" + parse[1]);
-			let div = post.getElementsByClassName("t_fsz")[0];
+				((!threadHrefReg.test($("postnum" + parse[1]).href)) || foldThread)) {
+			let content = $("postmessage_" + parse[1]);
+			let div = $C("t_fsz", post)[0];
 			if(content && content.offsetHeight > maxHeight) {
 				div.style.maxHeight = "80px";
 				div.style.overflow = "hidden";
-				let authi = document.getElementById("authorposton" + parse[1]).parentElement;
+				let authi = $("authorposton" + parse[1]).parentElement;
 				let btn = document.createElement("a");
 				btn.href = "javascript:void(0)";
 				btn.innerHTML = "显示/折叠帖子";
@@ -53,7 +55,7 @@ if(postList) {
 				let ac = document.createElement("div");
 				ac.style = "font-size:0.8em; text-align: center; background-color: #e3c99e;";
 				ac.appendChild(a);
-				document.getElementById("comment_" + parse[1]).after(ac);
+				$("comment_" + parse[1]).after(ac);
 			}
 		}
 	}

@@ -12,12 +12,14 @@ const INTERVAL = 1000 * 60 * 60 * 3;
 // 抓取信息的冷却时间：1/10秒
 const COOLDOWN = 100;
 // 上面这一大段全是处理改名问题的
+if(typeof $ === 'undefined')// common.js未加载
+	return;
 function usernameReady() {
-	let ct = document.getElementById("ct"), tips;
+	let ct = $("ct"), tips;
 	if(ct) {
 		let callback = () => {
 			// 给填写者的提示
-			let config = document.getElementById("confval-cavenightingale.mcbbs.modules.quickat-atList");
+			let config = $("confval-cavenightingale.mcbbs.modules.quickat-atList");
 			if(config && (!tips || !tips.isConnected)) {// 这里要考虑多次点击模块配置键的情况
 				if(!tips){
 					tips = document.createElement("div");
@@ -145,7 +147,7 @@ if(cached.config.length) {
 		}
 	});
 	// iframe节点需要额外监听
-	let frame = document.getElementById("e_iframe");
+	let frame = $("e_iframe");
 	if(frame) {
 		frame.contentWindow.addEventListener("keydown", ev => {
 			if(ev.ctrlKey && ev.shiftKey && ev.key === 'A') {
@@ -154,11 +156,11 @@ if(cached.config.length) {
 		});
 	}
 	// 监听添加的节点，主要是为了回复框，顺便一提Zapic原本这里用的API貌似Deprecated了
-	let appendParent = document.getElementById("append_parent");
+	let appendParent = $("append_parent");
 	if(appendParent) {
 		new MutationObserver(() => {
-			let postat = document.getElementById("postat");
-			if(!document.getElementById("cavenightingale_postatList") && postat) {
+			let postat = $("postat");
+			if(!$("cavenightingale_postatList") && postat) {
 				let a = document.createElement("a");
 				a.id = "cavenightingale_postatList";
 				a.href = "javascript:void(0)";
@@ -168,7 +170,7 @@ if(cached.config.length) {
 			}
 		}).observe(appendParent, { childList: true, subtree: true });
 	}
-	let fastpostat = document.getElementById("fastpostat");
+	let fastpostat = $("fastpostat");
 	if(fastpostat) {
 		let a = document.createElement("a");
 		a.id = "cavenightingale_fastpostatList";
@@ -177,7 +179,7 @@ if(cached.config.length) {
 		a.onclick = () => seditor_insertunit("fastpost", getAtCode(), "");
 		fastpostat.after(a);
 	}
-	let eAdvS1 = document.getElementById("e_adv_s1");
+	let eAdvS1 = $("e_adv_s1");
 	if(eAdvS1) {
 		let a = document.createElement("a");
 		a.id = "cavenightingale_fastpostatList";
@@ -189,11 +191,11 @@ if(cached.config.length) {
 			try {
 				insertText(at);
 			} catch(ex) {
-				let textinput = document.getElementById("e_textarea");
+				let textinput = $("e_textarea");
 				if(textinput.style.display != "none") {
 					textinput.value += at;
 				} else {
-					let p = document.getElementById("e_iframe").contentDocument.body.lastChild;
+					let p = $("e_iframe").contentDocument.body.lastChild;
 					p.outerHTML = at + p.outerHTML;
 				}
 			}};
@@ -218,6 +220,6 @@ if(cached.config.length) {
 let __editorfull = window.editorfull;
 window.editorfull = function(arg) {
 	__editorfull(arg);
-	let ctrl = document.getElementById("e_controls");// Zapic的排版错乱大BUG
+	let ctrl = $("e_controls");// Zapic的排版错乱大BUG
 	ctrl.style.minWidth = (parseInt(ctrl.style.minWidth) + 40) + "px";
 }
