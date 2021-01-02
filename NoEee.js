@@ -5,11 +5,11 @@ description = 折叠超长帖子
 author = 洞穴夜莺
 icon = https://i.loli.net/2020/12/26/9DxFIzTnC2R3htQ.png
 updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/NoEee.js
-version = 1.1
+version = 1.1.1
 */
 // 出于防止base64刷屏的考虑，图标放在图床，加载不出来不是我的问题
 
-if(typeof $ === 'undefined')// common.js未加载
+if(typeof $C === 'undefined')// common.js未加载
 	return;
 MCBBS.createConfig("maxHeight", "帖子最大高度", "text", "超过此高度的帖子将被折叠（单位：像素）");
 let maxHeight = parseInt(MCBBS.getConfigVal("maxHeight", 1000));

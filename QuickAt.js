@@ -5,14 +5,14 @@ description = 一键@人，带改名跟踪
 author = 洞穴夜莺
 icon = https://i.loli.net/2020/12/26/3zDMp1uxX9ZLsqN.png
 updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/QuickAt.js
-version = 1.1
+version = 1.1.1
 */
 // 改名的刷新时间间隔：一天八次
 const INTERVAL = 1000 * 60 * 60 * 3;
 // 抓取信息的冷却时间：1/10秒
 const COOLDOWN = 100;
 // 上面这一大段全是处理改名问题的
-if(typeof $ === 'undefined')// common.js未加载
+if(typeof $C === 'undefined')// common.js未加载
 	return;
 function usernameReady() {
 	let ct = $("ct"), tips;

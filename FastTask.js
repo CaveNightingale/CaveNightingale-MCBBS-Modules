@@ -5,9 +5,9 @@ description = 领取任务/获取奖励而不必频繁地跳转
 author = 洞穴夜莺
 icon = https://www.mcbbs.net/static/image/task/task.gif
 updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/FastTask.js
-version = 1.1.1
+version = 1.1.2
 */
-if(typeof $ === 'undefined')// common.js未加载
+if(typeof $C === 'undefined')// common.js未加载
 	return;
 const parser = new DOMParser();
 const taskUrlRegex = /https:\/\/www\.mcbbs\.net\/home\.php\?mod=task&do=(apply|draw)&id=[0-9]+&hash=[0-9|a-z]+/;

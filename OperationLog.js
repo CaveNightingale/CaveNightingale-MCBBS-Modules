@@ -5,9 +5,9 @@ description = 给每个主题显示操作记录
 author = 洞穴夜莺
 icon = https://www.mcbbs.net/template/mcbbs/image/collapsed_no.gif
 updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/OperationLog.js
-version = 1.1
+version = 1.1.1
 */
-if(typeof $ === 'undefined')// common.js未加载
+if(typeof $C === 'undefined')// common.js未加载
 	return;
 let postList = $("postlist");
 let threadHrefReg = /thread-([0-9]+)-[0-9]+-[0-9]+.html/;

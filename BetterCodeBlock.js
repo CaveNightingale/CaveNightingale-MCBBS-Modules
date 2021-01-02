@@ -3,9 +3,9 @@ id = cavenightingale.mcbbs.modules.bettercodeblock
 name = 更好的代码框
 description = 代码高亮
 author = 洞穴夜莺
-version = 0.3a
+version = 0.3.1a
 */
-if(typeof $ === 'undefined')// common.js未加载
+if(typeof $C === 'undefined')// common.js未加载
 	return;
 function resourceUrl(name) {
 	return 'https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/' + name;
