@@ -5,7 +5,7 @@ description = 领取任务/获取奖励而不必频繁地跳转
 author = 洞穴夜莺
 icon = https://www.mcbbs.net/static/image/task/task.gif
 updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/FastTask.js
-version = 1.1.2
+version = 1.1.3
 */
 if(typeof $C === 'undefined')// common.js未加载
 	return;
@@ -84,7 +84,8 @@ for(let a of document.getElementsByTagName("a")) {
 	}
 }
 
-if(location.pathname === "/home.php" && /item=(new|doing)/.test(location.search) && !/do=view/.test(location.search)) {
+if(location.pathname === "/home.php" && /mod=task/.test(location.search) &&
+		(/item=(new|doing)/.test(location.search) || (!/item=/.test(location.search))) && !/do=view/.test(location.search)) {
 	let divs = $C("ptm", document, "div");
 	if(divs[0] && divs[0].firstElementChild instanceof HTMLTableElement && divs[0].parentElement.className === "bm bw0"){
 		let bar = document.createElement("div");
