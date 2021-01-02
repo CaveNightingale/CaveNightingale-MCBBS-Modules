@@ -9,7 +9,7 @@ version = 1.1.1
 */
 // 出于防止base64刷屏的考虑，图标放在图床，加载不出来不是我的问题
 
-if(typeof $C === 'undefined')// common.js未加载
+if(!window.$C)// common.js未加载
 	return;
 MCBBS.createConfig("maxHeight", "帖子最大高度", "text", "超过此高度的帖子将被折叠（单位：像素）");
 let maxHeight = parseInt(MCBBS.getConfigVal("maxHeight", 1000));

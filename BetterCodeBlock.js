@@ -5,7 +5,7 @@ description = 代码高亮
 author = 洞穴夜莺
 version = 0.3.1a
 */
-if(typeof $C === 'undefined')// common.js未加载
+if(!window.$C)// common.js未加载
 	return;
 function resourceUrl(name) {
 	return 'https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/' + name;

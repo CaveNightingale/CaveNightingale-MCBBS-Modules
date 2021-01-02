@@ -12,7 +12,7 @@ const INTERVAL = 1000 * 60 * 60 * 3;
 // 抓取信息的冷却时间：1/10秒
 const COOLDOWN = 100;
 // 上面这一大段全是处理改名问题的
-if(typeof $C === 'undefined')// common.js未加载
+if(!window.$C)// common.js未加载
 	return;
 function usernameReady() {
 	let ct = $("ct"), tips;
