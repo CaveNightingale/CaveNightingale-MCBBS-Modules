@@ -3,7 +3,9 @@ id = cavenightingale.mcbbs.modules.bettercodeblock
 name = 更好的代码框
 description = 代码高亮
 author = 洞穴夜莺
-version = 0.3.1a
+icon = https://i.loli.net/2021/01/02/fFLYODZrI4vBzxE.png
+updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/BetterCodeBlock.js
+version = 1.1
 */
 if(!window.$C)// common.js未加载
 	return;
@@ -21,7 +23,10 @@ const fileNameRegex = {
 	css: /\.css$/,
 	d: /\.d$/,
 	bash: /\.sh$/,
-	batch: /\.bat$/
+	batch: /\.bat$/,
+	python: /\.py$/,
+	diff: /(\.diff|\.patch)$/,
+	properties: /\.properties$/
 };
 
 function guessLangFromFileName(line) {
@@ -46,18 +51,32 @@ const bbtag = ['b', 'i', 'u', 's', 'color', 'backcolor', 'url',
 		'password', 'hide', 'postbg', 'fly', 'ruby', 'qq', 'sup',
 		'sub', 'spoiler', 'afd', 'afdd', 'free'];
 function isBBCode(code) {
-	for(let name of bbtag) {
-		if(code.indexOf("[/" + name + "]") >= 0 && code.indexOf("[" + name) >= 0) {
+	for(let name of bbtag)
+		if(code.indexOf("[/" + name + "]") >= 0 && code.indexOf("[" + name) >= 0)
 			return true;
-		}
-	}
 	return false;
+}
+
+function isProperties(code) {
+	let lines = code.split("\n");
+	for(let line of lines)
+		if(!(/^#/.test(line) || /=/.test(line) || /^\s*$/.test(line)))
+			return false;
+	return true;
+}
+
+function isYaml(code) {
+	let lines = code.split("\n");
+	for(let line of lines)
+		if(!(/^\s*#/.test(line) || /\:/.test(line) || /^\s+-\s+/.test(line) || /^\s*$/.test(line)))
+			return false;
+	return true;
 }
 
 function guessLangFromContent(code) {
 	if(/@echo off|java\.exe -jar/mi.test(code)){
 		return 'batch';
-	} if(/(typedef|struct|union)/m.test(code)) {
+	}else if(/(\stypedef\s|\sstruct\s|\sunion\s)/m.test(code)) {
 		// C语言和C++区别难度较大，但是这些关键字只有C语言有，C++不支持的
 		if(/(_Bool|_Noreturn|_Complex|_Imaginary|_Generic|_Thread|_Atomic|_Static_assert)/m.test(code))
 			return 'c';
@@ -71,6 +90,10 @@ function guessLangFromContent(code) {
 		return 'json';
 	} else if(isBBCode(code)) {
 		return 'bbcode';
+	} else if(isProperties(code)) {
+		return 'properties';
+	} else if(isYaml(code)) {
+		return 'yaml';
 	}
 	return 'java';
 }

@@ -1,5 +1,14 @@
 
 {
+	"cavenightingale.mcbbs.modules.removelinkwarn": {
+		"id": "cavenightingale.mcbbs.modules.removelinkwarn",
+		"name": "移除外链警告",
+		"description": "移除外链警告页面",
+		"author": "洞穴夜莺",
+		"icon": "https://i.loli.net/2021/01/03/mCiBjsEr4HO1YPK.png",
+		"gid": "CaveNightingale:CaveNightingale-MCBBS-Modules:RemoveLinkWarn:master",
+		"version": "1.1"
+	},
 	"cavenightingale.mcbbs.modules.fastreport": {
 		"id": "cavenightingale.mcbbs.modules.fastreport",
 		"name": "快速举报",
@@ -23,8 +32,9 @@
 		"name": "更好的代码框",
 		"description": "代码高亮",
 		"author": "洞穴夜莺",
+		"icon": "https://i.loli.net/2021/01/02/fFLYODZrI4vBzxE.png",
 		"gid": "CaveNightingale:CaveNightingale-MCBBS-Modules:BetterCodeBlock:master",
-		"version": "0.3a"
+		"version": "1.1"
 	},
 	"cavenightingale.mcbbs.modules.noeee": {
 		"id": "cavenightingale.mcbbs.modules.noeee",
