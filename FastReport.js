@@ -5,7 +5,7 @@ description = 一键举报水龙头(现在做成Loader模块了！)
 author = 洞穴夜莺
 icon = https://www.mcbbs.net/uc_server/data/avatar/000/00/53/67_avatar_big.jpg
 updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/FastReport.js
-version = 1.1.2
+version = 1.1.3
 */
 
 MCBBS.createConfig("newTab", "在新的标签页举报", "checkbox", "如果填否，将会在当前页面举报");
@@ -66,7 +66,7 @@ if(MCBBS.getData("report_context")){
         } else {
 			showDialog("您对此用户的上一个举报尚未被处理");
 		}
-        MCBBS.storeData("report_context", undefined);
+        MCBBS.storeData("report_context", null);
     }
     let url = String(window.location);
     if(url == `https://www.mcbbs.net/forum.php?mod=viewthread&tid=557610&page=1&authorid=${discuz_uid}`){//在举报专用帖下
@@ -79,7 +79,7 @@ if(MCBBS.getData("report_context")){
         let context = $("fastpostmessage");
         context.value = MCBBS.getData("report_context");
         context.focus();
-        MCBBS.storeData("report_context", undefined);
+        MCBBS.storeData("report_context", null);
     }
 }
 
