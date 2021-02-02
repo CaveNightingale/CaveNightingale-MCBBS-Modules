@@ -5,7 +5,7 @@ description = 代码高亮
 author = 洞穴夜莺
 icon = https://i.loli.net/2021/01/02/fFLYODZrI4vBzxE.png
 updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/BetterCodeBlock.js
-version = 1.1
+version = 1.1.1
 */
 if(!window.$C)// common.js未加载
 	return;
@@ -112,42 +112,6 @@ function createLineNo(line) {
 	div.appendChild(pre);
 	return div;
 }
-
-function transformDom() {
-	let collection = $C("blockcode");
-	let list = [];
-	for(let x of collection) {// 这个HTMLCollection是动态的，操作过程中会导致内容变化，所以要先拷贝
-		list.push(x);
-	}
-	for(let block of list){
-		let index = block.parentElement.childNodes;
-		for(let i = 0; i < index.length; i++) {
-			if(index[i] === block) {
-				index = i;
-				break;
-			}
-		}
-		let fileNameGuess = index >= 1 ? guessLangFromFileName(block.parentElement.childNodes[index - 1].textContent) : undefined;
-		if(index >= 2 && block.parentElement.childNodes[index - 1] instanceof HTMLBRElement)
-			fileNameGuess = guessLangFromFileName(block.parentElement.childNodes[index - 2]);
-		for(let ele of block.firstChild.children) {
-			if(ele.tagName == "OL") {
-				let ccode = ele.innerText.replace(/\n\n/g, "\n").trim();
-				block.firstChild.style.display = "none";// 一会复制代码还要用
-				let copy = block.lastChild;
-				block.appendChild(createLineNo(ccode.split("\n").length));
-				let pre = document.createElement("pre");
-				block.appendChild(pre);
-				let code = document.createElement("code");
-				pre.appendChild(code);
-				copy.className = "cavenightingale_copy_code";
-				code.className = "language-" + (fileNameGuess || guessLangFromContent(ccode));
-				code.innerText = ccode;
-				block.className = "cavenightingale_blockcode";
-			}
-		}
-	}
-}
 let link = document.createElement("link");
 link.href = resourceUrl("lib/prism.css");
 link.rel = "stylesheet";
@@ -156,7 +120,7 @@ let prism = document.createElement("script");
 prism.src = resourceUrl('lib/prism.js');
 document.body.appendChild(prism);
 let style = document.createElement("style");
-style.innerHTML = `.cavenightingale_copy_code {
+style.innerHTML = `div.blockcode em {
     position: absolute;
     top: 3px;
     right: 7px;
@@ -170,18 +134,38 @@ style.innerHTML = `.cavenightingale_copy_code {
     cursor: pointer;
 }
 
-.cavenightingale_blockcode {
+div.blockcode {
 	position: relative;
 }`;// 修改过的Zapic的css
 document.body.appendChild(style);
 
-transformDom();
 let postlist = $("postlist");
-if(postlist)
-	new MutationObserver((list, observer) => {
-		observer.disconnect();
+function isBlank(str) {
+	for(let c of str)
+		if(c != '\r' && c != '\n' && c != ' ' && c != '\t')
+			return true;
+	return false;
+}
+function transformDom() {
+	for(let ol of document.querySelectorAll("div.blockcode div ol")) {
+		if(/^code_/.test(ol.parentElement.id)) {
+			let prev = ol.parentElement.parentElement.previousSibling;
+			while(prev && isBlank(prev.textContent))
+				prev = prev.previousSibling;
+			let code = ol.innerText.replace(/\n\n/i, "\n");
+			let lang = (prev ? guessLangFromFileName(prev.textContent) : null) || guessLangFromContent(code)
+			let lines = Prism.highlight(code, Prism.languages[lang], lang).split(/\n/);
+			for(let i = 0; i < lines.length; i++) {
+				ol.children[i].innerHTML = lines[i];
+			}
+		}
+	}
+}
+prism.onload = transformDom;
+if(postlist) {
+	new MutationObserver((rec, self) => {
+		self.disconnect();
 		transformDom();
-		if(typeof Prism != "undefined")
-			Prism.highlightAllUnder(postlist);
-		observer.observe(postlist, {childList: true, subtree: true});
-	}).observe(postlist, {childList: true, subtree: true});
+		self.observe(postlist);
+	}, {childList: true, subtree: true});
+}

@@ -10,6 +10,7 @@
 // 这个文件放在这里的主要目的是让ide能够js补全时补全MCBBS API，并不意味着将来这个项目真的会有TypeScript内容
 // 注意有的IDE会在补全的时候自动在文件头部加上require，请移除它们
 // 水毕，下面是正文
+// 由于一些原因下面的内容不是格式良好的ts文本
 
 type McbbsAjaxRecvType = 'XML' | 'HTML' | 'JSON';
 
@@ -1148,6 +1149,10 @@ declare function loadData(quiet, formobj);
 
 declare function checkForumnew(fid, lasttime);
 
+/**
+ * 检查指定板块是否有新的帖子，若有，加到顶部
+ * @param fid 板块id
+ **/
 declare function checkForumnew_btn(fid);
 
 declare function display_blocked_thread();

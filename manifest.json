@@ -34,7 +34,7 @@
 		"author": "洞穴夜莺",
 		"icon": "https://i.loli.net/2021/01/02/fFLYODZrI4vBzxE.png",
 		"gid": "CaveNightingale:CaveNightingale-MCBBS-Modules:BetterCodeBlock:master",
-		"version": "1.1"
+		"version": "1.1.1"
 	},
 	"cavenightingale.mcbbs.modules.noeee": {
 		"id": "cavenightingale.mcbbs.modules.noeee",
@@ -54,7 +54,7 @@
 		"icon": "https://www.mcbbs.net/template/mcbbs/image/collapsed_no.gif",
 		"updateURL": "https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/OperationLog.js",
 		"gid": "CaveNightingale:CaveNightingale-MCBBS-Modules:OperationLog:master",
-		"version": "1.1"
+		"version": "1.1.1"
 	},
 	"cavenightingale.mcbbs.modules.quickat": {
 		"id": "cavenightingale.mcbbs.modules.quickat",
