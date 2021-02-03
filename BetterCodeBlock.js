@@ -152,11 +152,11 @@ function transformDom() {
 			let prev = ol.parentElement.parentElement.previousSibling;
 			while(prev && isBlank(prev.textContent))
 				prev = prev.previousSibling;
-			let code = ol.innerText.replace(/\n\n/i, "\n");
+			let code = ol.innerText.replace(/\n\n/g, "\n").replaceAll(" ", "\r");
 			let lang = (prev ? guessLangFromFileName(prev.textContent) : null) || guessLangFromContent(code)
 			let lines = Prism.highlight(code, Prism.languages[lang], lang).split(/\n/);
 			for(let i = 0; i < lines.length; i++) {
-				ol.children[i].innerHTML = lines[i];
+				ol.children[i].innerHTML = lines[i].replaceAll("\r", "&nbsp;");
 			}
 		}
 	}
