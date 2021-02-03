@@ -13,6 +13,7 @@
 这个模块主要用于代码高亮
 会根据一些信息推断代码的语言，默认是java
 目前支持java、js、bbcode、c、cpp良好
+目前的行号显示有点小问题，原因还在调查，不过如果你把Zapic的FixCodeBlock打开就可以回避这个问题
 
 # OperationLog.js
 这个模块主要用于显示主题操作记录

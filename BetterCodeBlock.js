@@ -5,7 +5,7 @@ description = 代码高亮
 author = 洞穴夜莺
 icon = https://i.loli.net/2021/01/02/fFLYODZrI4vBzxE.png
 updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/BetterCodeBlock.js
-version = 1.1.1
+version = 1.1.3
 */
 if(!window.$C)// common.js未加载
 	return;
@@ -120,7 +120,11 @@ let prism = document.createElement("script");
 prism.src = resourceUrl('lib/prism.js');
 document.body.appendChild(prism);
 let style = document.createElement("style");
-style.innerHTML = `div.blockcode em {
+style.innerHTML = `div.blockcode div ol li {
+	white-space: nowrap;
+}
+
+div.blockcode em {
     position: absolute;
     top: 3px;
     right: 7px;
@@ -132,10 +136,11 @@ style.innerHTML = `div.blockcode em {
     transition-duration: .1s;
     opacity: 0.3;
     cursor: pointer;
-}
+}	
 
 div.blockcode {
 	position: relative;
+	overflow-x: auto !important;
 }`;// 修改过的Zapic的css
 document.body.appendChild(style);
 
@@ -148,16 +153,19 @@ function isBlank(str) {
 }
 function transformDom() {
 	for(let ol of document.querySelectorAll("div.blockcode div ol")) {
-		if(/^code_/.test(ol.parentElement.id)) {
+		if(/^code_/.test(ol.parentElement.id) && !ol.transformedByCaveNightingaleInBetterCodeBlockJS) {
 			let prev = ol.parentElement.parentElement.previousSibling;
 			while(prev && isBlank(prev.textContent))
 				prev = prev.previousSibling;
-			let code = ol.innerText.replace(/\n\n/g, "\n").replaceAll(" ", "\r");
+			let code = ol.innerText.replace(/\n\n/g, "\n");
 			let lang = (prev ? guessLangFromFileName(prev.textContent) : null) || guessLangFromContent(code)
-			let lines = Prism.highlight(code, Prism.languages[lang], lang).split(/\n/);
+			let lines = Prism.highlight(code.replaceAll(" ", "\r"), Prism.languages[lang], lang).split(/\n/);
 			for(let i = 0; i < lines.length; i++) {
 				ol.children[i].innerHTML = lines[i].replaceAll("\r", "&nbsp;");
 			}
+			let em = ol.parentElement.nextElementSibling;
+			em.onclick = () => setCopy(code, "代码已复制到剪切板");
+			ol.transformedByCaveNightingaleInBetterCodeBlockJS = true;
 		}
 	}
 }
