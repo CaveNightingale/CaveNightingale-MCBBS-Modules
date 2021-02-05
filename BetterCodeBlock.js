@@ -5,10 +5,12 @@ description = 代码高亮
 author = 洞穴夜莺
 icon = https://i.loli.net/2021/01/02/fFLYODZrI4vBzxE.png
 updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/BetterCodeBlock.js
-version = 1.1.3
+version = 1.1.5
 */
 if(!window.$C)// common.js未加载
 	return;
+let MExtConfig = JSON.parse(localStorage.MExt_config);
+let isZapicCodeFixEnabled = MExtConfig.fixCodeBlock && typeof MExt == "object";
 function resourceUrl(name) {
 	return 'https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/' + name;
 }
@@ -98,20 +100,6 @@ function guessLangFromContent(code) {
 	return 'java';
 }
 
-function createLineNo(line) {
-	let str = "";
-	for(let i = 1; i <= line; i++) {
-		let no = String(i);
-		str += no.length >= 3 ? "\n" + no : no.length === 2 ? "\n " + no : "\n  " + no;// 对齐
-	}
-	let pre = document.createElement("pre");
-	pre.style = "width: 2em;text-align: center;";
-	pre.innerHTML = str.substring(1);// 去除开头\n
-	let div = document.createElement("div");
-	div.style = "float:left;background-color: gray;";
-	div.appendChild(pre);
-	return div;
-}
 let link = document.createElement("link");
 link.href = resourceUrl("lib/prism.css");
 link.rel = "stylesheet";
@@ -120,8 +108,8 @@ let prism = document.createElement("script");
 prism.src = resourceUrl('lib/prism.js');
 document.body.appendChild(prism);
 let style = document.createElement("style");
-style.innerHTML = `div.blockcode div ol li {
-	white-space: nowrap;
+style.innerHTML = `div.blockcode div {
+	overflow-x: auto;
 }
 
 div.blockcode em {
@@ -136,11 +124,36 @@ div.blockcode em {
     transition-duration: .1s;
     opacity: 0.3;
     cursor: pointer;
-}	
+}
 
-div.blockcode {
+.pl div.blockcode {
 	position: relative;
 	overflow-x: auto !important;
+	background: #F7F7F7;
+}
+
+.cave-line-counter {
+    position: sticky;
+    float: left;
+    left: -10px;
+    line-height: 1.8em;
+    padding-top: 3px;
+    user-select: none;
+    margin: -4px 0px -50px -50px;
+    border-right: #d6d6d6 solid 1px;
+    width: 38px;
+    background: #ededed;
+    font-size: 12px;
+    font-family: Monaco, Consolas, 'Lucida Console', 'Courier New', serif;
+    padding-right: 4px;
+	text-align: right;
+	${isZapicCodeFixEnabled ? "display: none;" : ""}
+}
+
+.pl .blockcode div ol li {
+    list-style-type: none;
+	white-space: nowrap;
+	height: 1.8em;
 }`;// 修改过的Zapic的css
 document.body.appendChild(style);
 
@@ -151,6 +164,7 @@ function isBlank(str) {
 			return true;
 	return false;
 }
+
 function transformDom() {
 	for(let ol of document.querySelectorAll("div.blockcode div ol")) {
 		if(/^code_/.test(ol.parentElement.id) && !ol.transformedByCaveNightingaleInBetterCodeBlockJS) {
@@ -158,11 +172,17 @@ function transformDom() {
 			while(prev && isBlank(prev.textContent))
 				prev = prev.previousSibling;
 			let code = ol.innerText.replace(/\n\n/g, "\n");
-			let lang = (prev ? guessLangFromFileName(prev.textContent) : null) || guessLangFromContent(code)
+			let lang = (prev ? guessLangFromFileName(prev.textContent) : null) || guessLangFromContent(code);
 			let lines = Prism.highlight(code.replaceAll(" ", "\r"), Prism.languages[lang], lang).split(/\n/);
+			let lc = "";
 			for(let i = 0; i < lines.length; i++) {
 				ol.children[i].innerHTML = lines[i].replaceAll("\r", "&nbsp;");
+				lc += i < 10 ? "0" + i + ".\n": i + ".\n";
 			}
+			let div = document.createElement("div");
+			div.innerText = lc;
+			div.className = "cave-line-counter";
+			ol.parentElement.before(div);
 			let em = ol.parentElement.nextElementSibling;
 			em.onclick = () => setCopy(code, "代码已复制到剪切板");
 			ol.transformedByCaveNightingaleInBetterCodeBlockJS = true;
