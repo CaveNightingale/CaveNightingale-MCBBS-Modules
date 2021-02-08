@@ -364,6 +364,21 @@ declare function showPrompt(ctrlid, evt, msg, timeout, classname);
 
 declare function showCreditPrompt();
 
+/**
+ * 给用户弹出一个提示框
+ * @param msg 消息
+ * @param mode 模式，支持alert/info/notice/confirm/right
+ * @param t 标题
+ * @param func 确认时的行为
+ * @param cover 
+ * @param funccancel 
+ * @param leftmsg 
+ * @param confirmtxt 
+ * @param canceltxt 
+ * @param closetime 
+ * @param locationtime 
+ */
+
 declare function showDialog(msg, mode, t, func, cover, funccancel, leftmsg, confirmtxt, canceltxt, closetime, locationtime);
 
 /**

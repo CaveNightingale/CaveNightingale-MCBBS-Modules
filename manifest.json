@@ -5,7 +5,7 @@
 		"name": "杂项修复",
 		"description": "统一MCBBS前后端长度标准为字节数；调整引用标签；调整群聊首页；隐藏页面头部Logo及宣传栏（默认不开启）",
 		"author": "洞穴夜莺",
-		"gid": "CaveNightingale:CaveNightingale-MCBBS-Modules:FastTask:master",
+		"gid": "CaveNightingale:CaveNightingale-MCBBS-Modules:MiscFix:master",
 		"version": "1.1.0"
 	},
 	"cavenightingale.mcbbs.modules.removelinkwarn": {
