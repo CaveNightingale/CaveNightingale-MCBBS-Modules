@@ -14,7 +14,8 @@ MCBBS.createConfig("option", "杂项修复参数", "text",
 		"--no-fix-quote  不修复引用框<br>" + 
 		"--no-auto-refresh  不自动刷新群聊<br>" +
 		"--no-change-gui  不调整群聊GUI<br>" +
-		"--remove-header  删除页面头部");
+		"--remove-header  删除页面头部<br>" +
+		"--remove-footer  删除页面尾部");
 let config = MCBBS.getConfigVal("option", "");
 if(config.indexOf("--no-fix-mbstrlen") == -1){
 	mb_strlen = (str) => {
@@ -61,3 +62,11 @@ div.pm_mn div.tedt {
 	width: auto;
 }` : "");
 document.body.appendChild(style);
+
+let ft = $("ft");
+if(ft && config.indexOf("--remove-footer") != -1) {
+	let darkroom = document.createElement("li");
+	darkroom.innerHTML = '<a href="https://www.mcbbs.net/forum.php?mod=misc&action=showdarkroom">小黑屋</a>'
+	$("usertools_menu").appendChild(darkroom);
+	ft.parentElement.style.display = "none";
+}
