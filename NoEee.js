@@ -11,7 +11,7 @@ version = 1.1.1
 
 if(!window.$C)// common.js未加载
 	return;
-MCBBS.createConfig("maxHeight", "帖子最大高度", "text", "超过此高度的帖子将被折叠（单位：像素）");
+MCBBS.createConfig("maxHeight", "帖子最大高度", "text", "超过此高度的帖子将被折叠（单位：像素）", val => /^[0-9]+$/.test(val) ? undefined : "必须是正整数");
 let maxHeight = parseInt(MCBBS.getConfigVal("maxHeight", 1000));
 if(!(maxHeight >= 0)) {//这里不可以用<代替，因为maxHeight可能不是一个数
 	maxHeight = 1000;

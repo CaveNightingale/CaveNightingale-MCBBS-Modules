@@ -15,7 +15,7 @@
 		"author": "洞穴夜莺",
 		"icon": "https://i.loli.net/2021/01/03/mCiBjsEr4HO1YPK.png",
 		"gid": "CaveNightingale:CaveNightingale-MCBBS-Modules:RemoveLinkWarn:master",
-		"version": "1.1"
+		"version": "1.1.1"
 	},
 	"cavenightingale.mcbbs.modules.fastreport": {
 		"id": "cavenightingale.mcbbs.modules.fastreport",
@@ -50,9 +50,8 @@
 		"description": "折叠超长帖子",
 		"author": "洞穴夜莺",
 		"icon": "https://i.loli.net/2020/12/26/9DxFIzTnC2R3htQ.png",
-		"updateURL": "CaveNightingale:CaveNightingale-MCBBS-Modules:NoEee:master",
 		"gid": "CaveNightingale:CaveNightingale-MCBBS-Modules:NoEee:master",
-		"version": "1.1"
+		"version": "1.1.2"
 	},
 	"cavenightingale.mcbbs.modules.operationlog": {
 		"id": "cavenightingale.mcbbs.modules.operationlog",
@@ -60,7 +59,6 @@
 		"description": "给每个主题显示操作记录",
 		"author": "洞穴夜莺",
 		"icon": "https://www.mcbbs.net/template/mcbbs/image/collapsed_no.gif",
-		"updateURL": "https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/OperationLog.js",
 		"gid": "CaveNightingale:CaveNightingale-MCBBS-Modules:OperationLog:master",
 		"version": "1.1.1"
 	},
@@ -70,7 +68,6 @@
 		"description": "一键@人，带改名跟踪",
 		"author": "洞穴夜莺",
 		"icon": "https://i.loli.net/2020/12/26/3zDMp1uxX9ZLsqN.png",
-		"updateURL": "https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/QuickAt.js",
 		"gid": "CaveNightingale:CaveNightingale-MCBBS-Modules:QuickAt:master",
 		"version": "1.1"
 	}
