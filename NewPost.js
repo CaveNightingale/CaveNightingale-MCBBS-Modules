@@ -3,8 +3,7 @@ id = cavenightingale.mcbbs.modules.newpost
 name = 新主题
 description = 推送新的主题到记分版
 author = 洞穴夜莺
-updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/NewPost.js
-version = 1.0
+version = 1.1
 depend = cavenightingale.mcbbs.modules.commandlib -> CaveNightingale:CaveNightingale-MCBBS-Modules:CommandLib:master
 */
 let on = MCBBS.getData("newpost", false);

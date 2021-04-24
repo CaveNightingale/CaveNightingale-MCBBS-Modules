@@ -4,8 +4,7 @@ name = 快速任务
 description = 领取任务/获取奖励而不必频繁地跳转
 author = 洞穴夜莺
 icon = https://www.mcbbs.net/static/image/task/task.gif
-updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/FastTask.js
-version = 1.1.3
+version = 1.1.4
 */
 if(!window.$C)// common.js未加载
 	return;

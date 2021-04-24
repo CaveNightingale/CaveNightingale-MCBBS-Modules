@@ -4,8 +4,7 @@ name = 防止刷屏
 description = 折叠超长帖子
 author = 洞穴夜莺
 icon = https://i.loli.net/2020/12/26/9DxFIzTnC2R3htQ.png
-updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/NoEee.js
-version = 1.1.1
+version = 1.1.2
 */
 // 出于防止base64刷屏的考虑，图标放在图床，加载不出来不是我的问题
 

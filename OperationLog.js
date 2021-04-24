@@ -4,8 +4,7 @@ name = 主题操作记录
 description = 给每个主题显示操作记录和编辑记录（注意，操作记录和编辑记录都只在一些板块可用，但是按钮仍然会显示，例如编辑记录在反馈版和问答版可用，而茶馆不可用）
 author = 洞穴夜莺
 icon = https://www.mcbbs.net/template/mcbbs/image/collapsed_no.gif
-updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/OperationLog.js
-version = 1.1.1
+version = 1.1.2
 */
 if(!window.$C)// common.js未加载
 	return;
