@@ -4,6 +4,7 @@ name = 自动屏蔽挨卡帖
 description = 屏蔽挨了卡的帖子
 author = 洞穴夜莺
 version = 1.0
+permissions = loader:settop
 */
 function banpost(post) {
 	let ban = document.createElement("div");
