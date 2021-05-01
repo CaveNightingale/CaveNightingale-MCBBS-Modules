@@ -5,11 +5,20 @@ description = 一键举报水龙头(现在做成Loader模块了！)
 author = 洞穴夜莺
 icon = https://www.mcbbs.net/uc_server/data/avatar/000/00/53/67_avatar_big.jpg
 updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/FastReport.js
-version = 1.1.5
+version = 1.1.6
+permissions = loader:settop
 */
 
 if(MCBBS.aquireCommon()) {
     let newtab = MCBBS.createConfig("newTab", "在新的标签页举报", "checkbox", "如果填否，将会在当前页面举报").get(true);
+    let cols = MCBBS.createConfig("reportReasonCols", "举报列数", "text", "快速举报的列数",
+        str => /^[0-9]+$/.test(str) ? undefined : "必须是数字").get(1);
+    let reasonsl = MCBBS.createConfig("reportReasons", "自定义举报理由", "textarea",
+        "自定义的举报理由，一行一个，允许#开头的注释").get("").split("\n");
+    let reasons = [];
+    for(let r of reasonsl)
+        if(r.length && !r.startsWith("#"))
+            reasons.push(r);
     //所使用的水龙头图片的地址
     //可以像这样的base64直接把整张图片弄进来，也可以外链
     const imageurl = "data:image/ico;base64,AAABAAEAEBAQAAAAAAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAND/AOhGOgA/6OIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiAAAAAAAAACIAAAAAAAAAIgAAAAAAAAAAAAAAAAAAABEAAAAzMQABEQAAARMzEBERARERETMxERAAAAARMzEAAAAAAAETMwAAAAAAABEwAAAAAAAAERAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAD/+QAA//kAAP/5AAD/8AAA+DAAAPAgAAAAAAAAAAEAAAADAADwDwAA/B8AAPwfAAD8HwAA/j8AAP4/AADwBwAA";
@@ -83,11 +92,48 @@ if(MCBBS.aquireCommon()) {
         }
     }
 
+
+    document.addEventListener("DiscuzAjaxPostGet", e => {
+        if(/^fwin_content_miscreport[0-9]+$/.test(e.showid)) {
+            let getReasons = () => {
+                // 分隔list
+                let reportReason = reasons;
+                let rrstr = '<p class="mtn mbn"><table style="min-width: 30em"><tr>';
+                // 让用户选完理由之后可以继续编辑理由
+                let createElement = (i) =>
+`<td><label>
+<input type="radio" name="report_select" class="pr" onclick="jQuery('#report_message').val('${reportReason[i]}').focus()" value="${reportReason[i]}">
+${reportReason[i]}</label></td>`;
+                let width = parseInt(cols);
+                let height = Math.ceil(reportReason.length / width);
+                // 排序方式如此是为了在编辑自定义举报理由把短理由放在一起时它们更有可能出现在同一列
+                for(let i = 0; i < height; i++){
+                    for(let j = 0; j < width; j++)
+                       rrstr += height * j + i >= reportReason.length ? "" : createElement(height * j + i);
+                    rrstr += "</tr><tr>"
+                }
+                rrstr += "</tr></table></p>";
+                debugger;
+                return rrstr;
+            }
+            if (MCBBS.$("#report_reasons[appended]").length > 0) { return false; };
+            let reportContent = getReasons();
+            console.log(reportContent);
+            // 隐藏原版的理由，说实话那几个理由很鸡肋，因此把它们变成默认的自定义理由，这样用户可以删除它们，顺便解除弹窗的宽度限制
+            MCBBS.$("#report_reasons").attr("appended", "true").attr("hidden", "true").before(reportContent).parent().parent().css("width", "");
+            MCBBS.$("#report_other").attr("style","");
+        }
+    })
+
     let style = document.createElement("style");
     style.innerHTML =
         `.cavenightingale_report{
     background: url(${imageurl}) no-repeat 1px 2px!important;
     background-size: 16px!important;
+    }
+    
+    #report_message {
+        width: 97% !important
     }`;
     document.body.appendChild(style);
 
