@@ -6,7 +6,6 @@ author = 洞穴夜莺
 icon = https://www.mcbbs.net/uc_server/data/avatar/000/00/53/67_avatar_big.jpg
 updateURL = https://cdn.jsdelivr.net/gh/CaveNightingale/CaveNightingale-MCBBS-Modules@master/FastReport.js
 version = 1.1.6
-permissions = loader:settop
 */
 
 if(MCBBS.aquireCommon()) {

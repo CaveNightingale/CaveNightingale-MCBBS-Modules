@@ -1,14 +1,4 @@
 {
-	"cavenightingale.mcbbs.modules.fastreport": {
-		"id": "cavenightingale.mcbbs.modules.fastreport",
-		"name": "快速举报<img src='template/mcbbs/image/settop.png' />",
-		"description": "一键举报水龙头(现在做成Loader模块了！)",
-		"author": "洞穴夜莺",
-		"version": "1.1.6",
-		"icon": "https://www.mcbbs.net/uc_server/data/avatar/000/00/53/67_avatar_big.jpg",
-		"permissions": "loader:settop",
-		"gid": "~:~:~:FastReport:~"
-	},
 	"cavenightingale.mcbbs.modules.autobanposts": {
 		"id": "cavenightingale.mcbbs.modules.autobanposts",
 		"name": "自动屏蔽挨卡帖<img src='template/mcbbs/image/settop.png' />",
@@ -17,6 +7,16 @@
 		"version": "1.0",
 		"permissions": "loader:settop",
 		"gid": "~:~:~:AutoBanPosts:~"
+	},
+	"cavenightingale.mcbbs.modules.votereason": {
+		"id": "cavenightingale.mcbbs.modules.votereason",
+		"name": "默认评分理由<img src='template/mcbbs/image/settop.png' />",
+		"description": "添加默认的评分理由",
+		"author": "洞穴夜莺",
+		"version": "1.1.1",
+		"icon": "https://www.mcbbs.net/template/mcbbs/image/agree.gif",
+		"permissions": "loader:settop",
+		"gid": "~:~:~:VoteReason:~"
 	},
 	"cavenightingale.mcbbs.modules.avatarfix": {
 		"id": "cavenightingale.mcbbs.modules.avatarfix",
@@ -35,22 +35,6 @@
 		"icon": "https://i.loli.net/2021/01/02/fFLYODZrI4vBzxE.png",
 		"gid": "~:~:~:BetterCodeBlock:~"
 	},
-	"cavenightingale.mcbbs.modules.newpost": {
-		"id": "cavenightingale.mcbbs.modules.newpost",
-		"name": "新主题",
-		"description": "推送新的主题到记分版",
-		"author": "洞穴夜莺",
-		"version": "1.1",
-		"gid": "~:~:~:NewPost:~"
-	},
-	"cavenightingale.mcbbs.modules.miscfix": {
-		"id": "cavenightingale.mcbbs.modules.miscfix",
-		"name": "杂项修复",
-		"description": "统一MCBBS前后端长度标准为字节数；调整引用标签；调整群聊首页；隐藏页面头部Logo及宣传栏（默认不开启）",
-		"author": "洞穴夜莺",
-		"version": "1.1.1",
-		"gid": "~:~:~:MiscFix:~"
-	},
 	"cavenightingale.mcbbs.modules.commandlib": {
 		"id": "cavenightingale.mcbbs.modules.commandlib",
 		"name": "命令库",
@@ -58,6 +42,15 @@
 		"author": "洞穴夜莺",
 		"version": "1.0",
 		"gid": "~:~:~:CommandLib:~"
+	},
+	"cavenightingale.mcbbs.modules.fastreport": {
+		"id": "cavenightingale.mcbbs.modules.fastreport",
+		"name": "快速举报",
+		"description": "一键举报水龙头(现在做成Loader模块了！)",
+		"author": "洞穴夜莺",
+		"version": "1.1.6",
+		"icon": "https://www.mcbbs.net/uc_server/data/avatar/000/00/53/67_avatar_big.jpg",
+		"gid": "~:~:~:FastReport:~"
 	},
 	"cavenightingale.mcbbs.modules.fasttask": {
 		"id": "cavenightingale.mcbbs.modules.fasttask",
@@ -68,14 +61,21 @@
 		"icon": "https://www.mcbbs.net/static/image/task/task.gif",
 		"gid": "~:~:~:FastTask:~"
 	},
-	"cavenightingale.mcbbs.modules.removelinkwarn": {
-		"id": "cavenightingale.mcbbs.modules.removelinkwarn",
-		"name": "移除外链警告",
-		"description": "移除外链警告页面",
+	"cavenightingale.mcbbs.modules.miscfix": {
+		"id": "cavenightingale.mcbbs.modules.miscfix",
+		"name": "杂项修复",
+		"description": "统一MCBBS前后端长度标准为字节数；调整引用标签；调整群聊首页；隐藏页面头部Logo及宣传栏（默认不开启）",
 		"author": "洞穴夜莺",
 		"version": "1.1.1",
-		"icon": "https://i.loli.net/2021/01/03/mCiBjsEr4HO1YPK.png",
-		"gid": "~:~:~:RemoveLinkWarn:~"
+		"gid": "~:~:~:MiscFix:~"
+	},
+	"cavenightingale.mcbbs.modules.newpost": {
+		"id": "cavenightingale.mcbbs.modules.newpost",
+		"name": "新主题",
+		"description": "推送新的主题到记分版",
+		"author": "洞穴夜莺",
+		"version": "1.1",
+		"gid": "~:~:~:NewPost:~"
 	},
 	"cavenightingale.mcbbs.modules.noeee": {
 		"id": "cavenightingale.mcbbs.modules.noeee",
@@ -103,5 +103,14 @@
 		"version": "1.1.2",
 		"icon": "https://i.loli.net/2020/12/26/3zDMp1uxX9ZLsqN.png",
 		"gid": "~:~:~:QuickAt:~"
+	},
+	"cavenightingale.mcbbs.modules.removelinkwarn": {
+		"id": "cavenightingale.mcbbs.modules.removelinkwarn",
+		"name": "移除外链警告",
+		"description": "移除外链警告页面",
+		"author": "洞穴夜莺",
+		"version": "1.1.1",
+		"icon": "https://i.loli.net/2021/01/03/mCiBjsEr4HO1YPK.png",
+		"gid": "~:~:~:RemoveLinkWarn:~"
 	}
 }
