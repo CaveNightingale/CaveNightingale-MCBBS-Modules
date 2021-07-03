@@ -1,7 +1,7 @@
 /* MCBBS Module
 id = cavenightingale.mcbbs.modules.commandlib
 name = 命令库
-description = 提供类似Minecraft的命令，并给出API
+description = 提供类似Minecraft的命令，并给出API<span style="color: red">建议经常使用v3模板的用户不要安装，因为v3模板不像v2那样右侧有留出空白空间，使用此模组将遮挡页面右侧部分</span>
 author = 洞穴夜莺
 version = 1.0
 */

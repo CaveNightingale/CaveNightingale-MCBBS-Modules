@@ -17,11 +17,12 @@ const readProp = str => {
 	return rval;
 }
 const dval = MCBBS.createConfig("DefaultReasons", "默认评分理由", "textarea", "显示在评分页面的默认评分理由，示例：mcbbs有你更精彩~{{+5金粒}}");
+const height = MCBBS.createConfig("height", "默认评分理由的显示高度", "text", "高度，单位任意");
 addEventListener("DiscuzAjaxPostGet", () => {
 	const ctx = $("reasonselect");
 	if(ctx) {
 		ctx.innerHTML = "";
-		ctx.style.height = "4.3em";
+		ctx.style.height = height.get("4.3em");
 		readProp(dval.get("")).forEach(value => {
 			const score2input = {};
 			const tmarcos = [];

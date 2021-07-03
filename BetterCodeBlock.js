@@ -154,6 +154,7 @@ div.blockcode em {
     list-style-type: none;
 	white-space: nowrap;
 	height: 1.8em;
+	white-space: pre;
 }`;// 修改过的Zapic的css
 document.body.appendChild(style);
 
@@ -173,10 +174,10 @@ function transformDom() {
 				prev = prev.previousSibling;
 			let code = ol.innerText.replace(/\n\n/g, "\n");
 			let lang = (prev ? guessLangFromFileName(prev.textContent) : null) || guessLangFromContent(code);
-			let lines = Prism.highlight(code.replaceAll(" ", "\r"), Prism.languages[lang], lang).split(/\n/);
+			let lines = Prism.highlight(code, Prism.languages[lang], lang).split(/\n/);
 			let lc = "";
 			for(let i = 0; i < lines.length; i++) {
-				ol.children[i].innerHTML = lines[i].replaceAll("\r", "&nbsp;");
+				ol.children[i].innerHTML = lines[i];
 				lc += i < 10 ? "0" + i + ".\n": i + ".\n";
 			}
 			let div = document.createElement("div");
