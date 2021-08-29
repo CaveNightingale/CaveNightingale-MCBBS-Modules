@@ -27,22 +27,6 @@
 		"permissions": "loader:settop, loader:earlyload",
 		"gid": "~:~:~:AutoBanPosts:~"
 	},
-	"cavenightingale.mcbbs.modules.commandlib": {
-		"id": "cavenightingale.mcbbs.modules.commandlib",
-		"name": "命令库",
-		"description": "提供类似Minecraft的命令，并给出API<span style=\"color: red\">建议经常使用v3模板的用户不要安装，因为v3模板不像v2那样右侧有留出空白空间，使用此模组将遮挡页面右侧部分</span>",
-		"author": "洞穴夜莺",
-		"version": "1.0",
-		"gid": "~:~:~:CommandLib:~"
-	},
-	"ported.Mr_Fang.creditanalyse": {
-		"id": "ported.Mr_Fang.creditanalyse",
-		"name": "MCBBS积分分析",
-		"description": "适配v3模板的积分分析",
-		"author": "Mr_Fang",
-		"version": "1.0",
-		"gid": "~:~:~:CreditAnalyse:~"
-	},
 	"cavenightingale.mcbbs.modules.bettercodeblock": {
 		"id": "cavenightingale.mcbbs.modules.bettercodeblock",
 		"name": "更好的代码框",
@@ -51,14 +35,6 @@
 		"version": "1.1.5",
 		"icon": "https://i.loli.net/2021/01/02/fFLYODZrI4vBzxE.png",
 		"gid": "~:~:~:BetterCodeBlock:~"
-	},
-	"cavenightingale.mcbbs.modules.newpost": {
-		"id": "cavenightingale.mcbbs.modules.newpost",
-		"name": "新主题",
-		"description": "推送新的主题到记分版",
-		"author": "洞穴夜莺",
-		"version": "1.1",
-		"gid": "~:~:~:NewPost:~"
 	},
 	"cavenightingale.mcbbs.modules.fastreport": {
 		"id": "cavenightingale.mcbbs.modules.fastreport",
@@ -69,14 +45,13 @@
 		"icon": "https://www.mcbbs.net/uc_server/data/avatar/000/00/53/67_avatar_big.jpg",
 		"gid": "~:~:~:FastReport:~"
 	},
-	"cavenightingale.mcbbs.modules.fasttask": {
-		"id": "cavenightingale.mcbbs.modules.fasttask",
-		"name": "快速任务",
-		"description": "领取任务/获取奖励而不必频繁地跳转",
+	"cavenightingale.mcbbs.modules.newpost": {
+		"id": "cavenightingale.mcbbs.modules.newpost",
+		"name": "新主题",
+		"description": "推送新的主题到记分版",
 		"author": "洞穴夜莺",
-		"version": "1.1.4",
-		"icon": "https://www.mcbbs.net/static/image/task/task.gif",
-		"gid": "~:~:~:FastTask:~"
+		"version": "1.1",
+		"gid": "~:~:~:NewPost:~"
 	},
 	"cavenightingale.mcbbs.modules.miscfix": {
 		"id": "cavenightingale.mcbbs.modules.miscfix",
@@ -86,14 +61,40 @@
 		"version": "1.1.1",
 		"gid": "~:~:~:MiscFix:~"
 	},
-	"cavenightingale.mcbbs.modules.noeee": {
-		"id": "cavenightingale.mcbbs.modules.noeee",
-		"name": "防止刷屏",
-		"description": "折叠超长帖子",
+	"cavenightingale.mcbbs.modules.fasttask": {
+		"id": "cavenightingale.mcbbs.modules.fasttask",
+		"name": "快速任务",
+		"description": "领取任务/获取奖励而不必频繁地跳转",
 		"author": "洞穴夜莺",
-		"version": "1.1.2",
-		"icon": "https://i.loli.net/2020/12/26/9DxFIzTnC2R3htQ.png",
-		"gid": "~:~:~:NoEee:~"
+		"version": "1.1.4",
+		"icon": "https://www.mcbbs.net/static/image/task/task.gif",
+		"gid": "~:~:~:FastTask:~"
+	},
+	"cavenightingale.mcbbs.modules.commandlib": {
+		"id": "cavenightingale.mcbbs.modules.commandlib",
+		"name": "命令库",
+		"description": "提供类似Minecraft的命令，并给出API<span style=\"color: red\">建议经常使用v3模板的用户不要安装，因为v3模板不像v2那样右侧有留出空白空间，使用此模组将遮挡页面右侧部分</span>",
+		"author": "洞穴夜莺",
+		"version": "1.0",
+		"gid": "~:~:~:CommandLib:~"
+	},
+	"cavenightingale.mcbbs.modules.removelinkwarn": {
+		"id": "cavenightingale.mcbbs.modules.removelinkwarn",
+		"name": "移除外链警告",
+		"description": "移除外链警告页面",
+		"author": "洞穴夜莺",
+		"version": "1.1.1",
+		"icon": "https://i.loli.net/2021/01/03/mCiBjsEr4HO1YPK.png",
+		"gid": "~:~:~:RemoveLinkWarn:~"
+	},
+	"cavenightingale.mcbbs.modules.showpid": {
+		"id": "cavenightingale.mcbbs.modules.showpid",
+		"name": "显示帖子的pid",
+		"description": "点击复制帖子的pid",
+		"author": "洞穴夜莺",
+		"version": "1.0",
+		"permissions": "loader:earlyload",
+		"gid": "~:~:~:ShowPid:~"
 	},
 	"cavenightingale.mcbbs.modules.sigblock": {
 		"id": "cavenightingale.mcbbs.modules.sigblock",
@@ -109,35 +110,17 @@
 		"name": "检查刷分",
 		"description": "类似于xmdhs的脚本，但是会显示理由",
 		"author": "洞穴夜莺",
-		"version": "1.0",
+		"version": "1.1",
 		"gid": "~:~:~:ViewRating:~"
 	},
-	"cavenightingale.mcbbs.modules.showpid": {
-		"id": "cavenightingale.mcbbs.modules.showpid",
-		"name": "显示帖子的pid",
-		"description": "点击复制帖子的pid",
+	"cavenightingale.mcbbs.modules.noeee": {
+		"id": "cavenightingale.mcbbs.modules.noeee",
+		"name": "防止刷屏",
+		"description": "折叠超长帖子",
 		"author": "洞穴夜莺",
-		"version": "1.0",
-		"permissions": "loader:earlyload",
-		"gid": "~:~:~:ShowPid:~"
-	},
-	"cavenightingale.mcbbs.modules.operationlog": {
-		"id": "cavenightingale.mcbbs.modules.operationlog",
-		"name": "常用操作",
-		"description": "添加常用的操作",
-		"author": "洞穴夜莺",
-		"version": "1.1.4",
-		"icon": "https://www.mcbbs.net/template/mcbbs/image/collapsed_no.gif",
-		"gid": "~:~:~:Operations:~"
-	},
-	"cavenightingale.mcbbs.modules.removelinkwarn": {
-		"id": "cavenightingale.mcbbs.modules.removelinkwarn",
-		"name": "移除外链警告",
-		"description": "移除外链警告页面",
-		"author": "洞穴夜莺",
-		"version": "1.1.1",
-		"icon": "https://i.loli.net/2021/01/03/mCiBjsEr4HO1YPK.png",
-		"gid": "~:~:~:RemoveLinkWarn:~"
+		"version": "1.1.2",
+		"icon": "https://i.loli.net/2020/12/26/9DxFIzTnC2R3htQ.png",
+		"gid": "~:~:~:NoEee:~"
 	},
 	"cavenightingale.mcbbs.modules.quickat": {
 		"id": "cavenightingale.mcbbs.modules.quickat",
@@ -147,5 +130,14 @@
 		"version": "1.1.2",
 		"icon": "https://i.loli.net/2020/12/26/3zDMp1uxX9ZLsqN.png",
 		"gid": "~:~:~:QuickAt:~"
+	},
+	"cavenightingale.mcbbs.modules.operationlog": {
+		"id": "cavenightingale.mcbbs.modules.operationlog",
+		"name": "常用操作",
+		"description": "添加常用的操作",
+		"author": "洞穴夜莺",
+		"version": "1.1.4",
+		"icon": "https://www.mcbbs.net/template/mcbbs/image/collapsed_no.gif",
+		"gid": "~:~:~:Operations:~"
 	}
 }

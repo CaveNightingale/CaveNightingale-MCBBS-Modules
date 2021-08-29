@@ -3,7 +3,7 @@ id = cavenightingale.mcbbs.modules.viewrating
 name = 检查刷分
 description = 类似于xmdhs的脚本，但是会显示理由
 author = 洞穴夜莺
-version = 1.0
+version = 1.1
 */
 let np = val => /^[1-9][0-9]*$/.test(val) ? undefined : "必须是正整数";
 let rps = parseInt(MCBBS.createConfig("rps", "每秒请求次数", "text", "查刷分时每秒请求的次数", np).get(10));
@@ -18,22 +18,45 @@ class Schedule {// 防止403
 	}
 
 	getUrl(url, callback) {
-		this.queue.push(() => {
-			this.jq.get(url, (data, success) => {
-				callback(data, success);
+		console.log(url)
+		this.queue.push(async () => {
+			try {
+				let data = await this.jq.get(url);// 因为MCBBS特性，有时会遇到404
+				callback(data, "success");
 				setTimeout(() => {
 					this.queue.shift();
 					if(this.queue[0])
 						this.queue[0]();
 				}, this.interval);
-			});
+			} catch (ex) {
+				console.log(ex);
+				setTimeout(async () => {
+					try {
+						let data = await this.jq.get(url);
+						callback(data, "success");
+						setTimeout(() => {
+							this.queue.shift();
+							if(this.queue[0])
+								this.queue[0]();
+						}, this.interval);
+					} catch (ex) {
+						console.log(ex);
+						callback(null, "error");
+						setTimeout(() => {
+							this.queue.shift();
+							if(this.queue[0])
+								this.queue[0]();
+						}, this.interval);
+					}
+				}, this.interval)
+			}
 		});
 		if(this.queue.length == 1)
 			this.queue[0]();
 	}
 }
 
-schedule = new Schedule(parseInt(1000 / rps), jq);
+let schedule = new Schedule(parseInt(1000 / rps), jq);
 
 function encodeClass(prefix, name) {
 	return "cl_" + prefix + "_" + atob(name).replaceAll('+', '_A').replaceAll('/', '_B');
