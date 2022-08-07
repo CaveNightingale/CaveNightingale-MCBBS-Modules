@@ -45,14 +45,6 @@
 		"icon": "https://www.mcbbs.net/uc_server/data/avatar/000/00/53/67_avatar_big.jpg",
 		"gid": "~:~:~:FastReport:~"
 	},
-	"cavenightingale.mcbbs.modules.newpost": {
-		"id": "cavenightingale.mcbbs.modules.newpost",
-		"name": "新主题",
-		"description": "推送新的主题到记分版",
-		"author": "洞穴夜莺",
-		"version": "1.1",
-		"gid": "~:~:~:NewPost:~"
-	},
 	"cavenightingale.mcbbs.modules.miscfix": {
 		"id": "cavenightingale.mcbbs.modules.miscfix",
 		"name": "杂项修复",
@@ -69,14 +61,6 @@
 		"version": "1.1.4",
 		"icon": "https://www.mcbbs.net/static/image/task/task.gif",
 		"gid": "~:~:~:FastTask:~"
-	},
-	"cavenightingale.mcbbs.modules.commandlib": {
-		"id": "cavenightingale.mcbbs.modules.commandlib",
-		"name": "命令库",
-		"description": "提供类似Minecraft的命令，并给出API<span style=\"color: red\">建议经常使用v3模板的用户不要安装，因为v3模板不像v2那样右侧有留出空白空间，使用此模组将遮挡页面右侧部分</span>",
-		"author": "洞穴夜莺",
-		"version": "1.0",
-		"gid": "~:~:~:CommandLib:~"
 	},
 	"cavenightingale.mcbbs.modules.removelinkwarn": {
 		"id": "cavenightingale.mcbbs.modules.removelinkwarn",
@@ -104,14 +88,6 @@
 		"version": "1.0",
 		"permissions": "loader:earlyload",
 		"gid": "~:~:~:SigBlock:~"
-	},
-	"cavenightingale.mcbbs.modules.viewrating": {
-		"id": "cavenightingale.mcbbs.modules.viewrating",
-		"name": "检查刷分",
-		"description": "类似于xmdhs的脚本，但是会显示理由",
-		"author": "洞穴夜莺",
-		"version": "1.1",
-		"gid": "~:~:~:ViewRating:~"
 	},
 	"cavenightingale.mcbbs.modules.noeee": {
 		"id": "cavenightingale.mcbbs.modules.noeee",
